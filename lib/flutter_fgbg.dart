@@ -9,11 +9,20 @@ enum FGBGType {
 }
 
 class FGBGEvents {
-  static const _channel = EventChannel("com.ajinasokan.flutter_fgbg/events");
+  FGBGEvents._internal() {
+    _channel.receiveBroadcastStream().listen((event) {
+      _controller.add(
+        event == 'foreground' ? FGBGType.foreground : FGBGType.background,
+      );
+    });
+  }
+  factory FGBGEvents() => _instance;
+  static final FGBGEvents _instance = FGBGEvents._internal();
 
-  static Stream<FGBGType> get stream =>
-      _channel.receiveBroadcastStream().map((event) =>
-          event == "foreground" ? FGBGType.foreground : FGBGType.background);
+  final _channel = EventChannel("com.ajinasokan.flutter_fgbg/events");
+  final _controller = StreamController<FGBGType>.broadcast();
+
+  Stream<FGBGType> get stream => _controller.stream;
 }
 
 class FGBGNotifier extends StatefulWidget {
@@ -35,7 +44,7 @@ class _FGBGNotifierState extends State<FGBGNotifier> {
   @override
   void initState() {
     super.initState();
-    subscription = FGBGEvents.stream.listen((event) {
+    subscription = FGBGEvents().stream.listen((event) {
       widget.onEvent.call(event);
     });
   }
