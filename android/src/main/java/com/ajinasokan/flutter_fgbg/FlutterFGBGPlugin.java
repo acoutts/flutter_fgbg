@@ -114,17 +114,17 @@ public class FlutterFGBGPlugin implements FlutterPlugin, ActivityAware, Lifecycl
 
   @Override
   public void onActivityCreated(Activity activity, Bundle bundle) {
-    Log.d("FGBG", "onActivityCreated");
+    Log.d("FGBG", "onActivityCreated | " + activity.getLocalClassName());
   }
 
   @Override
   public void onActivityStarted(Activity activity) {
-    Log.d("FGBG", "onActivityStarted");
+    Log.d("FGBG", "onActivityStarted | " + activity.getLocalClassName());
   }
 
   @Override
   public void onActivityResumed(Activity activity) {
-    Log.d("FGBG", "onActivityResumed");
+    Log.d("FGBG", "onActivityResumed | " + activity.getLocalClassName());
 
     if(isInBackground){
       if (lifecycleSink != null) {
@@ -136,22 +136,22 @@ public class FlutterFGBGPlugin implements FlutterPlugin, ActivityAware, Lifecycl
 
   @Override
   public void onActivityPaused(Activity activity) {
-    Log.d("FGBG", "onActivityPaused");
+    Log.d("FGBG", "onActivityPaused | " + activity.getLocalClassName());
   }
 
   @Override
   public void onActivityStopped(Activity activity) {
-    Log.d("FGBG", "onActivityStopped");
+    Log.d("FGBG", "onActivityStopped | " + activity.getLocalClassName());
   }
 
   @Override
   public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
-    Log.d("FGBG", "onActivitySaveInstanceState");
+    Log.d("FGBG", "onActivitySaveInstanceState | " + activity.getLocalClassName());
   }
 
   @Override
   public void onActivityDestroyed(Activity activity) {
-    Log.d("FGBG", "onActivityDestroyed");
+    Log.d("FGBG", "onActivityDestroyed | " + activity.getLocalClassName());
   }
 
   @Override
